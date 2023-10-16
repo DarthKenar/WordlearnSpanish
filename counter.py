@@ -17,25 +17,26 @@ def main(page: ft.Page):
         for i in range(5):
             words.append(
                 ft.Container(
-                    ft.TextField(
-                        text_size=28,
-                        max_length=1,
-                        focused_border_width=2, 
+                    content=ft.Text(
+                        value="X",
+                        size=28,
                         width=50,
                         height=50,
-                        filled=True
-                        
+                        text_align="CENTER"
                     ),
                     width=50,
-                    height=75,
+                    height=50,
                     border_radius=ft.border_radius.all(5),
+                    bgcolor=ft.colors.BLACK38,
                 )
             )
         return ft.Row(
-            words, 
+            controls=words, 
             alignment=ft.MainAxisAlignment.CENTER,
             )
-    def check():
+    def check(e):
+        print("Btn check pressed")
+        panel[0].controls[2].content.value = "S"
         page.update()
 
     def check_display():
