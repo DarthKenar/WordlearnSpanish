@@ -8,27 +8,6 @@ class WordApp(ft.UserControl):
     panel_row = 0
     panel_col = 0
 
-    def close_dlg(self, ControlEvent):
-        self.popup_win.open = False
-        self.update()
-
-    popup_win = ft.AlertDialog(
-        modal=True,
-        title=ft.Text("Please confirm"),
-        content=ft.Text("Do you really want to delete all those files?"),
-        actions=[
-            ft.TextButton("Yes", on_click=close_dlg),
-            ft.TextButton("No", on_click=close_dlg),
-        ],
-        actions_alignment=ft.MainAxisAlignment.END,
-        on_dismiss=lambda e: print("Modal dialog dismissed!"),
-    )
-
-    def open_dlg_modal(self, ControlEvent):
-        self.dialog = self.popup_win
-        self.popup_win.open = True
-        self.update()
-
     def panel_help(self):
         print(f"""
               
@@ -36,7 +15,17 @@ class WordApp(ft.UserControl):
         Fila: {self.panel_row}
             
         """)
+    popup_win = ft.AlertDialog(
+        title=ft.Text("Hello, you!"), on_dismiss=lambda e: print("Dialog dismissed!")
+    )
 
+    def open_dlg_modal(self, ControlEvent):
+        
+        self.page.dialog = self.popup_win
+        self.popup_win.open = True
+        print("OPEN DIALOG")
+        self.page.update()
+        
     def __init__(self, *args, **kwargs):
         super(WordApp, self).__init__(*args, **kwargs)
     
@@ -45,6 +34,7 @@ class WordApp(ft.UserControl):
             self.panel_build(),
             self.enter_build(),
             self.keyboard_build(),
+            ft.ElevatedButton("Open dialog", on_click=self.open_dlg_modal),
         ])
         self.select()
         return(template)
@@ -55,8 +45,8 @@ class WordApp(ft.UserControl):
             word += self.panel[self.panel_row].controls[i].content.value
             print(word,"---",word_selected)
             if word == word_selected:
-                print("SON IGUALES")
                 self.open_dlg_modal
+                print("SON IGUALES")
 
     def deselect(self):
         if self.panel_col >= 0 and self.panel_col <= 4:
@@ -65,7 +55,7 @@ class WordApp(ft.UserControl):
     def select(self):
         if self.panel_col >= 0 and self.panel_col <= 4:
             self.panel[self.panel_row].controls[self.panel_col].border = ft.border.all(0,)
-            self.panel[self.panel_row].controls[self.panel_col].border = ft.border.all(2,ft.colors.RED_100)
+            self.panel[self.panel_row].controls[self.panel_col].border = ft.border.all(2,ft.colors.AMBER_300)
 
     #! ACTIONS
     def enter_action(self, ControlEvent):
@@ -236,7 +226,7 @@ def main(page: ft.Page):
     )
     wordapp = WordApp()
     page.add(
-        wordapp
+        wordapp,
     )
     
     
