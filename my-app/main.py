@@ -7,6 +7,28 @@ class WordApp(ft.UserControl):
     keyboard = "qwertyuiopasdfghjklñzxcvbnm"
     panel_row = 0
     panel_col = 0
+
+    def close_dlg(self, ControlEvent):
+        self.popup_win.open = False
+        self.update()
+
+    popup_win = ft.AlertDialog(
+        modal=True,
+        title=ft.Text("Please confirm"),
+        content=ft.Text("Do you really want to delete all those files?"),
+        actions=[
+            ft.TextButton("Yes", on_click=close_dlg),
+            ft.TextButton("No", on_click=close_dlg),
+        ],
+        actions_alignment=ft.MainAxisAlignment.END,
+        on_dismiss=lambda e: print("Modal dialog dismissed!"),
+    )
+
+    def open_dlg_modal(self, ControlEvent):
+        self.dialog = self.popup_win
+        self.popup_win.open = True
+        self.update()
+
     def panel_help(self):
         print(f"""
               
@@ -19,25 +41,27 @@ class WordApp(ft.UserControl):
         super(WordApp, self).__init__(*args, **kwargs)
     
     def build(self):
-        return(ft.Column(controls=[
+        template = ft.Column(controls=[
             self.panel_build(),
             self.enter_build(),
             self.keyboard_build(),
-        ]))
+        ])
+        self.select()
+        return(template)
     
     def check_word(self):
         word = ""
         for i in range(5):
             word += self.panel[self.panel_row].controls[i].content.value
-        if word == word_selected:
-            dlg = ft.AlertDialog(title=ft.Text("Exelente!"), on_dismiss=lambda e: print("Dialog dismissed!"))
-            self.page.dialog = dlg
-            dlg.open = True
-            self.update()
+            print(word,"---",word_selected)
+            if word == word_selected:
+                print("SON IGUALES")
+                self.open_dlg_modal
 
     def deselect(self):
         if self.panel_col >= 0 and self.panel_col <= 4:
             self.panel[self.panel_row].controls[self.panel_col].border = ft.border.all(0,)
+
     def select(self):
         if self.panel_col >= 0 and self.panel_col <= 4:
             self.panel[self.panel_row].controls[self.panel_col].border = ft.border.all(0,)
@@ -54,6 +78,7 @@ class WordApp(ft.UserControl):
             self.panel_row += 1
             self.panel_col = 0
             self.select()
+            self.update()
 
         else:
             print("Se debe completar la linea para enviar el check")
@@ -201,8 +226,8 @@ def main(page: ft.Page):
         ],
         on_change=change_view
     )
-    page.window_width = 360
-    page.window_max_width = 360
+    page.window_width = 460
+    page.window_max_width = 460
     page.window_height = 800
     page.window_max_height = 800
     page.padding = ft.padding.only(top=50)
@@ -213,5 +238,6 @@ def main(page: ft.Page):
     page.add(
         wordapp
     )
+    
     
 ft.app(main)
