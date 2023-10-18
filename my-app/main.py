@@ -7,23 +7,82 @@ class WordApp(ft.UserControl):
     keyboard = "qwertyuiopasdfghjklñzxcvbnm"
     panel_row = 0
     panel_col = 0
+    def panel_help(self):
+        print(f"""
+              
+        Columna: {self.panel_col}
+        Fila: {self.panel_row}
+            
+        """)
 
     def __init__(self, *args, **kwargs):
         super(WordApp, self).__init__(*args, **kwargs)
-
+    
     def build(self):
-        
         return(ft.Column(controls=[
             self.panel_build(),
             self.enter_build(),
             self.keyboard_build(),
         ]))
+    
+    def check_word(self):
+        word = ""
+        for i in range(5):
+            word += self.panel[self.panel_row].controls[i].content.value
+        if word == word_selected:
+            dlg = ft.AlertDialog(title=ft.Text("Exelente!"), on_dismiss=lambda e: print("Dialog dismissed!"))
+            self.page.dialog = dlg
+            dlg.open = True
+            self.update()
 
+    def deselect(self):
+        if self.panel_col >= 0 and self.panel_col <= 4:
+            self.panel[self.panel_row].controls[self.panel_col].border = ft.border.all(0,)
+    def select(self):
+        if self.panel_col >= 0 and self.panel_col <= 4:
+            self.panel[self.panel_row].controls[self.panel_col].border = ft.border.all(0,)
+            self.panel[self.panel_row].controls[self.panel_col].border = ft.border.all(2,ft.colors.RED_100)
+
+    #! ACTIONS
     def enter_action(self, ControlEvent):
-        print("Btn check pressed")
-        self.panel[0].controls[2].content.value
-        self.update()
+        print("enter_action")
+        self.deselect()
 
+        if self.panel_col == 5:
+            self.check_word()
+            # Comprobar aquí si la palabra corresponde a la buscada.
+            self.panel_row += 1
+            self.panel_col = 0
+            self.select()
+
+        else:
+            print("Se debe completar la linea para enviar el check")
+
+        self.panel_help()
+
+    def key_word_action(self, ControlEvent):
+        print(f"Se presionó la letra {ControlEvent.control.content.value}")
+        if self.panel_col < 5:
+            self.panel[self.panel_row].controls[self.panel_col].content.value = ControlEvent.control.content.value
+            self.deselect()
+            self.panel_col += 1
+            self.select()
+            self.update()
+        self.panel_help()
+
+    def key_delete_action(self, ControlEvent):
+        print("key_delete_action")
+        if self.panel_col >= 0:
+            if self.panel_col != 0:
+                self.deselect()
+                self.panel_col -= 1
+                self.panel[self.panel_row].controls[self.panel_col].content.value = ""
+                self.select()
+
+            self.update()
+        self.panel_help()
+
+    #! BUILDS
     def enter_build(self):
         btn = [
             ft.Container(
@@ -34,16 +93,9 @@ class WordApp(ft.UserControl):
                     on_click=self.enter_action
                 ),
                 padding=ft.padding.only(top=15,bottom=15)
-                        
             )
         ]
         return ft.Row(btn,alignment=ft.MainAxisAlignment.CENTER)
-    
-    def key_word_action(self,ControlEvent):
-        print(f"Se presionó la letra {ControlEvent.control.content.value}")
-        print(self.panel[0].controls[0].content.value)
-        self.panel[0].controls[0].content.value = ControlEvent.control.content.value
-        self.page.update()
         
     def key_word(self, letter: str):
         key = ft.Container(
@@ -75,15 +127,12 @@ class WordApp(ft.UserControl):
             ),
         ])
     
-    def key_delete_action(self):
-        pass
-    
     def key_delete(self):
         self.key = ft.Container(
             ft.IconButton(
                 icon=ft.icons.ARROW_BACK,
                 icon_size=25,
-                # on_click=self.key_delete_action
+                on_click=self.key_delete_action
             )
         )
         return self.key
@@ -133,7 +182,7 @@ def main(page: ft.Page):
                 page.window_destroy()
         else:
             pass
-        
+
     page.navigation_bar = ft.NavigationBar(
         destinations=[
             ft.NavigationDestination(icon=ft.icons.FEATURED_PLAY_LIST_OUTLINED,
