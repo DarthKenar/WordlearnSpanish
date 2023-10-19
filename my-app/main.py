@@ -48,6 +48,12 @@ class WordApp(ft.UserControl):
         self.select()
         return(template)
     
+    def enter_update(self):
+        if self.panel_col == 5:
+            self.btn[0].content.opacity = 1
+        else:
+            self.btn[0].content.opacity = 0.5
+    
     def clean_panel(self):
         print("CLEAN PANEL")
         for i in range(6):
@@ -107,7 +113,7 @@ class WordApp(ft.UserControl):
     def enter_action(self, ControlEvent):
         print("enter_action")
         self.deselect()
-
+        
         if self.panel_col == 5:
             self.check_word()
             if self.panel_row == 5:
@@ -116,8 +122,8 @@ class WordApp(ft.UserControl):
             self.panel_row += 1
             self.panel_col = 0
             self.select()
+            self.enter_update()
             self.update()
-
         else:
             print("Se debe completar la linea para enviar el check")
 
@@ -130,6 +136,7 @@ class WordApp(ft.UserControl):
             self.deselect()
             self.panel_col += 1
             self.select()
+            self.enter_update()
             self.update()
         self.panel_help()
 
@@ -141,26 +148,29 @@ class WordApp(ft.UserControl):
                 self.panel_col -= 1
                 self.panel[self.panel_row].controls[self.panel_col].content.value = ""
                 self.select()
+            self.enter_update()
             self.update()
         self.panel_help()
 
     #! BUILDS
     def enter_build(self):
-        btn = [
+        self.btn = [
             ft.Container(
                 ft.FilledButton(
-                    text="CHECK",
+                    text="ENTER",
                     width=125,
                     height=50,
-                    on_click=self.enter_action
+                    on_click=self.enter_action,
+                    opacity=0.5
+                    
                 ),
                 padding=ft.padding.only(top=15,bottom=15)
             )
         ]
-        return ft.Row(btn,alignment=ft.MainAxisAlignment.CENTER)
+        return ft.Row(self.btn,alignment=ft.MainAxisAlignment.CENTER)
         
     def key_word(self, letter: str):
-        key = ft.Container(
+        self.key = ft.Container(
             ft.Text(letter,color="black"),
             on_click=self.key_word_action,
             padding=11,
@@ -169,7 +179,7 @@ class WordApp(ft.UserControl):
             bgcolor=ft.colors.ON_SURFACE_VARIANT,
             border_radius=10
         )
-        return key
+        return self.key
     
     def keyboard_build(self):
 
