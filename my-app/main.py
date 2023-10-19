@@ -10,43 +10,88 @@ class WordApp(ft.UserControl):
 
     def panel_help(self):
         print(f"""
-              
+
         Columna: {self.panel_col}
         Fila: {self.panel_row}
-            
-        """)
-    popup_win = ft.AlertDialog(
-        title=ft.Text("Hello, you!"), on_dismiss=lambda e: print("Dialog dismissed!")
-    )
 
-    def open_dlg_modal(self, ControlEvent):
-        
-        self.page.dialog = self.popup_win
-        self.popup_win.open = True
-        print("OPEN DIALOG")
-        self.page.update()
+        """)
         
     def __init__(self, *args, **kwargs):
+        self.popup_win = ft.AlertDialog(
+                        modal=True,
+                        title=ft.Text(value="WIN!"),
+                        content=ft.Text(value="Messi? The best soccer player of all time!"),
+                        actions=[
+                            ft.TextButton("New Game", on_click=self.close_popup_win),
+                        ],
+                        actions_alignment=ft.MainAxisAlignment.END,
+                        on_dismiss=lambda e: print("Reiniciar Juego"),
+                    )
+        self.popup_lose = ft.AlertDialog(
+                        modal=True,
+                        title=ft.Text(value="You are a Loser!"),
+                        content=ft.Text(value="Try it again!"),
+                        actions=[
+                            ft.TextButton(":)", on_click=self.close_popup_lose),
+                        ],
+                        actions_alignment=ft.MainAxisAlignment.END,
+                        on_dismiss=lambda e: print("Reiniciar Juego"),
+                    )
         super(WordApp, self).__init__(*args, **kwargs)
-    
+
     def build(self):
         template = ft.Column(controls=[
             self.panel_build(),
             self.enter_build(),
             self.keyboard_build(),
-            ft.ElevatedButton("Open dialog", on_click=self.open_dlg_modal),
         ])
         self.select()
         return(template)
     
+    def clean_panel(self):
+        print("CLEAN PANEL")
+        for i in range(6):
+            for j in range(5):
+                self.panel_row = i
+                self.panel_col = j
+                self.deselect()
+                self.panel[i].controls[j].content.value = ""
+        self.panel_col = 0
+        self.panel_row = 0
+        self.select()
+
+    def close_popup_win(self, ControlEvent):
+        self.popup_win.open = False
+        self.clean_panel()
+        self.page.update()
+        self.update()
+
+    def close_popup_lose(self, ControlEvent):
+        self.popup_lose.open = False
+        self.clean_panel()
+        self.page.update()
+        self.update()
+
+    def open_popup_win(self, ControlEvent):
+        # popup win
+        self.page.dialog = self.popup_win
+        self.popup_win.open = True
+        self.page.update()
+
+    def open_popup_lose(self, ControlEvent):
+        # popup lose
+        self.page.dialog = self.popup_lose
+        self.popup_lose.open = True
+        self.page.update()
+
     def check_word(self):
         word = ""
         for i in range(5):
             word += self.panel[self.panel_row].controls[i].content.value
+        if word == word_selected:
+            self.open_popup_win(self)
             print(word,"---",word_selected)
-            if word == word_selected:
-                self.open_dlg_modal
-                print("SON IGUALES")
+            print("SON IGUALES")
 
     def deselect(self):
         if self.panel_col >= 0 and self.panel_col <= 4:
@@ -54,8 +99,9 @@ class WordApp(ft.UserControl):
 
     def select(self):
         if self.panel_col >= 0 and self.panel_col <= 4:
-            self.panel[self.panel_row].controls[self.panel_col].border = ft.border.all(0,)
-            self.panel[self.panel_row].controls[self.panel_col].border = ft.border.all(2,ft.colors.AMBER_300)
+            if self.panel_row >= 0 and self.panel_row <= 5:
+                self.panel[self.panel_row].controls[self.panel_col].border = ft.border.all(0,)
+                self.panel[self.panel_row].controls[self.panel_col].border = ft.border.all(2,ft.colors.AMBER_300)
 
     #! ACTIONS
     def enter_action(self, ControlEvent):
@@ -64,7 +110,9 @@ class WordApp(ft.UserControl):
 
         if self.panel_col == 5:
             self.check_word()
-            # Comprobar aquí si la palabra corresponde a la buscada.
+            if self.panel_row == 5:
+                print("POPUP LOSE")
+                self.open_popup_lose(self)
             self.panel_row += 1
             self.panel_col = 0
             self.select()
@@ -93,7 +141,6 @@ class WordApp(ft.UserControl):
                 self.panel_col -= 1
                 self.panel[self.panel_row].controls[self.panel_col].content.value = ""
                 self.select()
-
             self.update()
         self.panel_help()
 
@@ -201,16 +248,16 @@ def main(page: ft.Page):
     page.navigation_bar = ft.NavigationBar(
         destinations=[
             ft.NavigationDestination(icon=ft.icons.FEATURED_PLAY_LIST_OUTLINED,
-                                    label="Estadísticas",
+                                    label="Statistics",
                                     selected_icon=ft.icons.FEATURED_PLAY_LIST
                                     ),
             ft.NavigationDestination(icon=ft.icons.PLAY_CIRCLE_OUTLINE,
-                                    label="Jugar",
+                                    label="Play",
                                     selected_icon=ft.icons.PLAY_CIRCLE_FILLED_ROUNDED
                                     ),
             ft.NavigationDestination(
                 icon=ft.icons.OUTPUT,
-                label="Salir",
+                label="Exit",
                 
             ),
         ],
