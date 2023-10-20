@@ -1,6 +1,7 @@
 import flet as ft
-
-word_selected="messi"
+import random as rdm
+words_table = ["pasar","comer","baile","ronca","cazar","manco","tasar","tigre","tieso","casas","palta"]
+word_selected = rdm.choice(words_table)
 
 class WordApp(ft.UserControl):
 
@@ -20,7 +21,7 @@ class WordApp(ft.UserControl):
         self.popup_win = ft.AlertDialog(
                         modal=True,
                         title=ft.Text(value="WIN!"),
-                        content=ft.Text(value="Messi? The best soccer player of all time!"),
+                        content=ft.Text(value="Thanks for play!"),
                         actions=[
                             ft.TextButton("New Game", on_click=self.close_popup_win),
                         ],
@@ -30,7 +31,7 @@ class WordApp(ft.UserControl):
         self.popup_lose = ft.AlertDialog(
                         modal=True,
                         title=ft.Text(value="You are a Loser!"),
-                        content=ft.Text(value="Try it again!"),
+                        content=ft.Text(value=f"Rhe word was {word_selected}"),
                         actions=[
                             ft.TextButton(":)", on_click=self.close_popup_lose),
                         ],
@@ -62,8 +63,15 @@ class WordApp(ft.UserControl):
             for key_container in controls:
                 if type(key_container.content) is type(ft.Text()):
                     if key_container.content.value == word:
-                        key_container.bgcolor = color
-                        key_container.content.color = ft.colors.WHITE
+                        print(key_container.bgcolor)
+                        if key_container.bgcolor == ft.colors.ON_SURFACE_VARIANT or key_container.bgcolor == ft.colors.BLACK12:
+                            key_container.bgcolor = color
+                            key_container.content.color = ft.colors.WHITE
+                        elif key_container.bgcolor == ft.colors.ORANGE and color == ft.colors.GREEN:
+                            key_container.bgcolor = color
+                            key_container.content.color = ft.colors.WHITE
+                        else:
+                            pass
 
     def clean_keyboard(self):
         for i, keyboard_row in enumerate(self.keyboard.controls):
@@ -73,6 +81,7 @@ class WordApp(ft.UserControl):
             for key_container in controls:
                 if type(key_container.content) is type(ft.Text()):
                     key_container.bgcolor = ft.colors.ON_SURFACE_VARIANT
+                    key_container.content.color = ft.colors.BACKGROUND
 
     def clean_panel(self):
         print("CLEAN PANEL")
@@ -121,6 +130,9 @@ class WordApp(ft.UserControl):
             print(word,"---",word_selected)
             print("SON IGUALES")
         else:
+            if self.panel_row == 5:
+                print("POPUP LOSE")
+                self.open_popup_lose(self)
             word_selected_copy = word_selected
             for i,j in enumerate(word_selected):
                 print(f"{i}-->{j}")
@@ -161,9 +173,6 @@ class WordApp(ft.UserControl):
         
         if self.panel_col == 5:
             self.check_word()
-            if self.panel_row == 5:
-                print("POPUP LOSE")
-                self.open_popup_lose(self)
             self.panel_row += 1
             self.panel_col = 0
             self.select()
