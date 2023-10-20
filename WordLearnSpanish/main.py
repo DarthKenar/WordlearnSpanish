@@ -31,7 +31,7 @@ class WordApp(ft.UserControl):
         self.popup_lose = ft.AlertDialog(
                         modal=True,
                         title=ft.Text(value="You are a Loser!"),
-                        content=ft.Text(value=f"Rhe word was {word_selected}"),
+                        content=ft.Text(value=f"The word was {word_selected}"),
                         actions=[
                             ft.TextButton(":)", on_click=self.close_popup_lose),
                         ],

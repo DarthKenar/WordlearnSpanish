@@ -1,4 +1,4 @@
-# A myapp Flet app
+# A wordlearnspanish Flet app
 
 An example of a minimal Flet app.
 
