@@ -1,7 +1,9 @@
 # A wordlearnspanish Flet app
 
-## Español 
+## Español
+
 [Documentación en Español](docs/español/README.md)
 
 ## English
+
 [Documentación en Español](docs/english/README.md)
