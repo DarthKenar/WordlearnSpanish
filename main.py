@@ -1,27 +1,21 @@
 import flet as ft
 import random as rdm
-words_table = ["pasar","comer","baile","ronca","cazar","manco","tasar","tigre","tieso","casas","palta"]
-word_selected = rdm.choice(words_table)
-
+words_table:dict = {"pasar":"go, proceed, go ahead\nAl llegar, pasamos directamente al comedor.\nWe went straight through to the dining room on arrival.","comer":"eat: (consume a food)\nI eat pasta every day.\nComo pasta todos los días.","baile":"dance\nLos alumnos organizaron un baile de fin de curso para recaudar fondos.\nThe students organized an end of the year dance to raise funds.","ronca":"Snore\n(hacer ruido al dormir)\n(making noise while sleeping)\nEl hombre no paró de roncar en toda la noche.\nThe man didn't stop snoring all night.	","cazar":"catch\n(dar captura)\n(provide capture)\nCazaron al lobo que mataba al ganado.\nThey caught the wolf that killed the cattle.","manco":"one-armed/one-handed\n(persona: sin brazo)\n(person: without arm)\nMi tío es manco: le falta el brazo derecho.\My uncle is one-armed, he is missing his right arm.","tasar":"value/rate/fix at\n(fijar un valor a un bien)\n(to set a value to an asset)\nUn anticuario tasó el escritorio de mi abuela.\nAn antique dealer valued my grandmother's writing desk.","tigre":"tiger\n(felino salvaje)\n(wild feline)\nEl tigre es mi felino preferido.\nThe tiger is my favorite feline.","tieso":"firm, rigid, stiff, erect\n(erecto, duro)\n(erect, hard)\n	Clavó el poste en el suelo hasta que quedó bien tieso para colgar la bandera.\n	He stabbed the post into the ground until it was firm (or: rigid) enough to hang the flag.","casar":"marry\n(civil o religioso)\n(civil or religious)\n	El Alcalde los casó en una ceremonia civil que se celebró en el Ayuntamiento.\n	The mayor married them in a civil ceremony celebrated at the town hall.","palta":"(fruto: aguacate/palta), (fruit: avocado)\n	La palta es un excelente complemento de todo tipo de comidas y ensaladas.\n	Avocados are an excellent complement to all sorts of dishes and salads."}
+word_selected:str = rdm.choice(list(words_table))
+print(word_selected)
+total_rows:int = 6
+total_cols:int = len(word_selected)
 class WordApp(ft.UserControl):
 
     keyboard = "qwertyuiopasdfghjklñzxcvbnm"
     panel_row = 0
     panel_col = 0
 
-    def panel_help(self):
-        print(f"""
-
-        Columna: {self.panel_col}
-        Fila: {self.panel_row}
-
-        """)
-        
     def __init__(self, *args, **kwargs):
         self.popup_win = ft.AlertDialog(
                         modal=True,
                         title=ft.Text(value="WIN!"),
-                        content=ft.Text(value="Thanks for play!"),
+                        content=ft.Text(value=f"{words_table[word_selected]}"),
                         actions=[
                             ft.TextButton("New Game", on_click=self.close_popup_win),
                         ],
@@ -30,10 +24,10 @@ class WordApp(ft.UserControl):
                     )
         self.popup_lose = ft.AlertDialog(
                         modal=True,
-                        title=ft.Text(value="You are a Loser!"),
-                        content=ft.Text(value=f"The word was {word_selected}"),
+                        title=ft.Text(value=f"The word was '{word_selected.upper()}'"),
+                        content=ft.Text(value=f"{words_table[word_selected]}"),
                         actions=[
-                            ft.TextButton(":)", on_click=self.close_popup_lose),
+                            ft.TextButton("retry :D", on_click=self.close_popup_lose),
                         ],
                         actions_alignment=ft.MainAxisAlignment.END,
                         on_dismiss=lambda e: print("Reiniciar Juego"),
@@ -50,7 +44,7 @@ class WordApp(ft.UserControl):
         return(template)
     
     def enter_update(self):
-        if self.panel_col == 5:
+        if self.panel_col == total_cols:
             self.btn[0].content.opacity = 1
         else:
             self.btn[0].content.opacity = 0.5
@@ -84,9 +78,8 @@ class WordApp(ft.UserControl):
                     key_container.content.color = ft.colors.BACKGROUND
 
     def clean_panel(self):
-        print("CLEAN PANEL")
-        for i in range(6):
-            for j in range(5):
+        for i in range(total_rows):
+            for j in range(total_cols):
                 self.panel_row = i
                 self.panel_col = j
                 self.deselect()
@@ -123,15 +116,12 @@ class WordApp(ft.UserControl):
 
     def check_word(self):
         word = ""
-        for i in range(5):
+        for i in range(total_cols):
             word += self.panel[self.panel_row].controls[i].content.value
         if word == word_selected:
             self.open_popup_win(self)
-            print(word,"---",word_selected)
-            print("SON IGUALES")
         else:
-            if self.panel_row == 5:
-                print("POPUP LOSE")
+            if self.panel_row == total_cols:
                 self.open_popup_lose(self)
             word_selected_copy = word_selected
             for i,j in enumerate(word_selected):
@@ -157,21 +147,19 @@ class WordApp(ft.UserControl):
                         self.panel[self.panel_row].controls[i].border = border_color
 
     def deselect(self):
-        if self.panel_col >= 0 and self.panel_col <= 4:
+        if self.panel_col >= 0 and self.panel_col < total_cols:
             self.panel[self.panel_row].controls[self.panel_col].border = ft.border.all(0,)
 
     def select(self):
-        if self.panel_col >= 0 and self.panel_col <= 4:
-            if self.panel_row >= 0 and self.panel_row <= 5:
+        if self.panel_col >= 0 and self.panel_col < total_cols:
+            if self.panel_row >= 0 and self.panel_row <= total_cols:
                 self.panel[self.panel_row].controls[self.panel_col].border = ft.border.all(0,)
                 self.panel[self.panel_row].controls[self.panel_col].border = ft.border.all(2,ft.colors.AMBER_300)
 
     #! ACTIONS
     def enter_action(self, ControlEvent):
-        print("enter_action")
         self.deselect()
-        
-        if self.panel_col == 5:
+        if self.panel_col == total_cols:
             self.check_word()
             self.panel_row += 1
             self.panel_col = 0
@@ -181,18 +169,15 @@ class WordApp(ft.UserControl):
         else:
             print("Se debe completar la linea para enviar el check")
 
-        self.panel_help()
-
     def key_word_action(self, ControlEvent):
         print(f"Se presionó la letra {ControlEvent.control.content.value}")
-        if self.panel_col < 5:
+        if self.panel_col < total_cols:
             self.panel[self.panel_row].controls[self.panel_col].content.value = ControlEvent.control.content.value
             self.deselect()
             self.panel_col += 1
             self.select()
             self.enter_update()
             self.update()
-        self.panel_help()
 
     def key_delete_action(self, ControlEvent):
         print("key_delete_action")
@@ -204,7 +189,6 @@ class WordApp(ft.UserControl):
                 self.select()
             self.enter_update()
             self.update()
-        self.panel_help()
 
     #! BUILDS
     def enter_build(self):
@@ -273,7 +257,7 @@ class WordApp(ft.UserControl):
     
     def words_display(self):
         self.words = []
-        for i in range(5):
+        for i in range(total_cols):
             self.words.append(
                 ft.Container(
                     content=ft.Text(
@@ -297,14 +281,14 @@ def main(page: ft.Page):
 
     def change_view(e):
         if page.navigation_bar.selected_index == 0:
-            print("Op 1 NAVBAR")
+            print("User press Play")
         elif page.navigation_bar.selected_index == 1:
-            print("Op 2 NAVBAR")
+            print("User press Exit")
             if page.platform == "windows":
                 print("Terminando aplicacion desde pc")
                 page.window_close()
             else:
-                print("Terminando aplicacion desde celular")
+                print("Terminando aplicacion desde celular?")
                 page.window_destroy()
         else:
             pass
