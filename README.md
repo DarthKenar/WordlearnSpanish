@@ -6,4 +6,4 @@
 
 ## English
 ### Wordle-style game with the objective of helping English speakers learn Spanish.
-[Documentación en Español](docs/english/README.md)
+[English Documenntation](docs/english/README.md)
