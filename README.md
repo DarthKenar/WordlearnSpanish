@@ -1,5 +1,7 @@
 # A wordlearnspanish Flet app
 
+![Previsualizacion de la app](../WLS-screen.png)
+
 ## Español
 ### Juego al estilo Wordle con el objetivo de ayudar a personas de habla inglesa a aprender español.
 [Documentación en Español](docs/español/README.md)
