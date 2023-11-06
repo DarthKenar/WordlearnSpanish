@@ -1,8 +1,18 @@
-# Para ejecutar la aplicación
+# Preview
 
-![Previsualizacion de la app](../WLS-screen.png)
+![Previsualizacion de la app](../screenshots/mobile.png)
 
-## Realiza los siguientes pasos
+---
+
+![Previsualizacion de la app](../screenshots/mobile-1.png)
+
+---
+
+![Previsualizacion de la app](../screenshots/mobile-2.png)
+
+---
+
+## Para ejecutar la aplicación Realiza los siguientes pasos
 
 ```bash
 pip install flet

@@ -1,11 +1,11 @@
 {
-    "name": "myapp",
-    "short_name": "myapp",
-    "description": "A minimal Flet app",
-    "start_url": ".",
+    "name": "WordLearnSpanish",
+    "short_name": "WLS",
+    "description": "A minimal Wordle game, find the word, ",
+    "start_url": "localhost",
     "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#0175C2",
+    "background_color": "#ffbf00",
+    "theme_color": "#ffbf00",
     "orientation": "natural",
     "prefer_related_applications": false,
     "icons": [
@@ -20,13 +20,13 @@
             "type": "image/png"
         },
         {
-            "src": "icons/icon-maskable-192.png",
+            "src": "icons/icon-192.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "maskable"
         },
         {
-            "src": "icons/icon-maskable-512.png",
+            "src": "icons/icon-512.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable"

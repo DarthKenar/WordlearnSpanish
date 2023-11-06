@@ -231,7 +231,7 @@ class WordApp(ft.UserControl):
                 alignment="center",
             ),
             ft.Row(controls=[
-                ft.Container(ft.Row([self.key_word(j) for i, j in enumerate(self.keyboard) if i > 20])),
+                ft.Container(ft.Row([self.key_word(j) for i, j in enumerate(self.keyboard) if i >= 20])),
                 ft.Container(self.key_delete())],
                 alignment="center",
             ),
