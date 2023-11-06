@@ -1,6 +1,8 @@
 # A wordlearnspanish Flet app
 
-![Previsualizacion de la app](docs/screenshots/mobile.png)
+![Previsualizacion de la app](docs/screenshots/mobile-blue.png)
+![Previsualizacion de la app](docs/screenshots/mobile-green.png)
+![Previsualizacion de la app](docs/screenshots/mobile-orange.png)
 
 ## Español
 
