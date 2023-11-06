@@ -1,17 +1,19 @@
 # A wordlearnspanish Flet app
 
+## Preview
+
 ![Previsualizacion de la app](docs/screenshots/mobile-blue.png)
 ![Previsualizacion de la app](docs/screenshots/mobile-green.png)
 ![Previsualizacion de la app](docs/screenshots/mobile-orange.png)
 
 ## Español
 
-### Juego al estilo Wordle con el objetivo de ayudar a personas de habla inglesa a aprender español.
+### Juego al estilo Wordle con el objetivo de ayudar a personas de habla inglesa a aprender español
 
 [Documentación en Español](docs/español/README.md)
 
 ## English
 
-### Wordle-style game with the objective of helping English speakers learn Spanish.
+### Wordle-style game with the objective of helping English speakers to learn Spanish
 
 [English Documenntation](docs/english/README.md)
