@@ -317,7 +317,7 @@ def main(page: ft.Page):
     page.window_max_height = 800
     page.padding = ft.padding.only(top=50)
     page.theme = ft.Theme(
-        color_scheme_seed=ft.colors.DEEP_ORANGE,
+        color_scheme_seed=ft.colors.AMBER,
     )
     wordapp = WordApp()
     page.add(
