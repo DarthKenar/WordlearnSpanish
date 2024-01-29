@@ -11,6 +11,12 @@
 ![Previsualizacion de la app](../screenshots/mobile-2.png)
 
 ---
+## Si confias en mí podés descargar el ejecutable en:
+
+  https://drive.google.com/file/d/1Z48cdkFghmgcN8tdy9CQNZDoU8NqVNCP/view?usp=sharing
+
+  > Descomprimir el archivo rar con (WinRar, WinZip u otros)
+  > Ejecutar
 
 ## Para ejecutar la aplicación Realiza los siguientes pasos
 
