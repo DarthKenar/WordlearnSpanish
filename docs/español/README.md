@@ -16,6 +16,7 @@
   https://drive.google.com/file/d/1Z48cdkFghmgcN8tdy9CQNZDoU8NqVNCP/view?usp=sharing
 
   > Descomprimir el archivo rar con (WinRar, WinZip u otros)
+
   > Ejecutar
 
 ## Para ejecutar la aplicación Realiza los siguientes pasos
