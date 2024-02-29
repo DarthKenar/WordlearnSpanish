@@ -6,7 +6,15 @@
 
   > Disfruta!
 
-## Para ejecutar desde la clonacion del repo:
+## Para ejecutar utilizando flet:
+
+- Clonar repositorio:
+
+```bash
+git clone https://github.com/DarthKenar/WordlearnSpanish.git
+```
+
+- Luego, ubicado en la raiz del proyecto:
 
 ```bash
 pip install flet
@@ -16,7 +24,7 @@ pip install flet
 flet run
 ```
 
-Disfruta!
+> Disfruta!
 
 ### Recursos
 
