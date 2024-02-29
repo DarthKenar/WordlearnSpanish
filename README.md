@@ -8,11 +8,15 @@
 
 ### Juego al estilo Wordle
 
+- Aprende Español con WordLearnSpanish
+
 - Al completar una palabra correctamente Wordlearnspanish te mostrará su definición (español/inglés) y algunos ejemplos sobre la aplicación dde la misma.
 
 [Documentación en Español](docs/español/README.md)
 
 ## English
+
+- Learn Spanish with WordLearnSpanish
 
 - When you complete a word correctly, Wordlearnspanish will show you its definition (Spanish/English) and some examples of its application.
 
