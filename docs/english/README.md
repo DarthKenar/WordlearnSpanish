@@ -1,16 +1,20 @@
-# Preview
+## Download executable at:
 
-![Previsualizacion de la app](../screenshots/mobile.png)
+  https://drive.google.com/file/d/1Z48cdkFghmgcN8tdy9CQNZDoU8NqVNCP/view?usp=sharing
 
----
+   > Unzip the rar file with (WinRar, WinZip or others)
 
-![Previsualizacion de la app](../screenshots/mobile-1.png)
+  > Enjoy!
 
----
+## To run the app using Flet:
 
-![Previsualizacion de la app](../screenshots/mobile-2.png)
+- Clone repository
 
-## To run the app, follow the steps below
+```bash
+git clone https://github.com/DarthKenar/WordlearnSpanish.git
+```
+
+- Then, located at the root of the project:
 
 ```bash
 pip install flet
@@ -20,7 +24,7 @@ pip install flet
 flet run
 ```
 
-Enjoy!
+> Enjoy!
 
 ### Resources
 
@@ -30,4 +34,4 @@ Enjoy!
 
 ---
 
-[Volver](../../README.md)
+[Back](../../README.md)
