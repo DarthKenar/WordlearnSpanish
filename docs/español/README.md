@@ -4,9 +4,9 @@
 
   > Descomprimir el archivo rar con (WinRar, WinZip u otros)
 
-  > DDisfruta!
+  > Disfruta!
 
-## Para clonar la aplicación:
+## Para ejecutar desde la clonacion del repo:
 
 ```bash
 pip install flet
