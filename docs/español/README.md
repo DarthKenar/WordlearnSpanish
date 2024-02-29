@@ -4,9 +4,9 @@
 
   > Descomprimir el archivo rar con (WinRar, WinZip u otros)
 
-  > Ejecutar
+  > DDisfruta!
 
-## Para ejecutar la aplicación Realiza los siguientes pasos
+## Para clonar la aplicación:
 
 ```bash
 pip install flet
