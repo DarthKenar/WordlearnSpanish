@@ -6,12 +6,14 @@
 
 ## Español
 
-### Juego al estilo Wordle con el objetivo de ayudar a personas de habla inglesa a aprender español
+### Juego al estilo Wordle
+
+- Al completar una palabra correctamente Wordlearnspanish te mostrará su definición (español/inglés) y algunos ejemplos sobre la aplicación dde la misma.
 
 [Documentación en Español](docs/español/README.md)
 
 ## English
 
-### Wordle-style game with the objective of helping English speakers to learn Spanish
+- When you complete a word correctly, Wordlearnspanish will show you its definition (Spanish/English) and some examples of its application.
 
 [English Documentation](docs/english/README.md)
