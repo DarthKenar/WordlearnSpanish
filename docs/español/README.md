@@ -2,10 +2,6 @@
 
 [Descargar ejecutable](https://drive.google.com/file/d/10yQggzTwXuOGXo-ERM62WFxP_6eZvXBu/view?usp=drive_link)
 
-  > Descomprimir el archivo rar con (WinRar, WinZip u otros)
-
-  > Disfruta!
-
 ## Para ejecutar utilizando flet:
 
 ### Con Python Instalado:
