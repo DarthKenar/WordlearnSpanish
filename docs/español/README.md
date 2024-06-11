@@ -8,6 +8,10 @@
 
 ## Para ejecutar utilizando flet:
 
+### Con Python Instalado:
+
+(https://www.python.org/downloads/)[Descarga]
+
 - Clonar repositorio:
 
 ```bash
