@@ -1,10 +1,6 @@
-## Download executable at:
+## Download Game at:
 
-  https://drive.google.com/file/d/1Z48cdkFghmgcN8tdy9CQNZDoU8NqVNCP/view?usp=sharing
-
-   > Unzip the rar file with (WinRar, WinZip or others)
-
-  > Enjoy!
+[Download Game](https://drive.google.com/file/d/10yQggzTwXuOGXo-ERM62WFxP_6eZvXBu/view?usp=drive_link)
 
 ## To run the app using Flet:
 
