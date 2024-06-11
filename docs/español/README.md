@@ -1,6 +1,7 @@
 ## Podés descargar el ejecutable en:
 
-  [Descargar Ejecutable](https://drive.google.com/file/d/1Z48cdkFghmgcN8tdy9CQNZDoU8NqVNCP/view?usp=sharing)
+  [Descargar Ejecutable]([https://drive.google.com/file/d/1Z48cdkFghmgcN8tdy9CQNZDoU8NqVNCP/view?usp=sharing](https://drive.google.com/file/d/10yQggzTwXuOGXo-ERM62WFxP_6eZvXBu/view?usp=drive_link
+))
 
   > Descomprimir el archivo rar con (WinRar, WinZip u otros)
 
