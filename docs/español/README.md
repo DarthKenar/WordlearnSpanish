@@ -28,7 +28,25 @@ pip install flet
 flet run
 ```
 
-> Disfruta!
+## Para crear ejecutable:
+
+```bash
+pip install pyinstaller
+```
+
+### Para compilar los iconos:
+
+```bash
+pip install pillow
+```
+
+### Compilamos con...
+
+```bash
+flet pack main.py --name WordLearnSpanish --icon ./assets/icon.png
+```
+
+> Disfruta y comparte!
 
 ### Recursos
 
